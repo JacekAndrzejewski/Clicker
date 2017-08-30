@@ -1,0 +1,58 @@
+/* reset settings */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img, video, canvas{
+    max-width: 100%;
+}
+
+ul{
+    list-style: none;
+}
+
+
+/* main classes */
+
+.mainScreen {
+	display: flex;
+	flex-direction: column;
+	width: 50vw;
+	height: 100vh;
+	float: left;
+}
+.mainView img {
+	height: 500px;
+	width: 500px;
+}
+
+.buildNumber {
+	color: red;
+}
+
+.app {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.shop {
+	border: 5px solid green;
+}
+
+.upgradeList {
+	border: 5px solid violet;
+}
+
+.upgrade {
+	border: 1px solid black;
+}
+
+.canBuy {
+	background-color: rgba(0,0,128,0.5);
+}
+
+.cantBuy {
+	background-color: rgba(128,0,0,0.5);
+}
