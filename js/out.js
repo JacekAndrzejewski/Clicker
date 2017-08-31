@@ -11912,555 +11912,729 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*jshint ignore:start*/
 
 
-var polishText = {
-    changeLanguage: "Zmień język",
-    money: "Kliknięcia",
-    moneyOnSec: "Zysk/sek",
-    clicksOnSec: "Kliknięcia/sek",
-    maxMoney: "Max kasy",
-    price: "Cena",
-    buy: "Kup",
-    buyMax: "Kup Max",
-    tick: "Takt",
-    bName: ["Klikacz lv.1", "Klikacz lv.2"],
-    bDesc: ["Automatycznie klika za ciebie co takt", "Automatycznie klika za ciebie 10x co takt"],
-    uName: ["Lepsze Klikanie", "Lepsiejsze Klikanie", "Oprocentowanie"],
-    uDesc: ["Klikanie daje o 1 kliknięcie więcej!", "Klikanie daje o kolejne 2 kliknięcia więcej!", "Zyski z autoklikania są zwiększone o 50%!"]
+var _module = {
+	polish: {
+		changeLanguage: "Zmień język",
+		money: "Kliknięcia",
+		moneyOnSec: "Zysk/sek",
+		clicksOnSec: "Kliknięcia/sek",
+		maxMoney: "Max kasy",
+		price: "Cena",
+		buy: "Kup",
+		buyMax: "Kup Max",
+		tick: "Takt",
+		bName: ["Klikacz lv.1", "Klikacz lv.2", "Klikacz lv.3"],
+		bDesc: ["Automatycznie klika za ciebie co takt z połową siły", "Automatycznie klika za ciebie 2x co takt", "Automatycznie klika za ciebie 5x co takt"],
+		uName: ["Lepsze Klikanie", "Lepsiejsze Klikanie", "Oprocentowanie"],
+		uDesc: ["Klikanie daje o 1 kliknięcie więcej!", "Klikanie daje o kolejne 2 kliknięcia więcej!", "Zyski z autoklikania są zwiększone o 50%!"]
+	},
+	english: {
+		changeLanguage: "Change Language",
+		money: "Money",
+		moneyOnSec: "Money/sec",
+		clicksOnSec: "Clicks/sec",
+		maxMoney: "Max money",
+		price: "Price",
+		buy: "Buy",
+		buyMax: "Buy max",
+		tick: "Tick",
+		bName: ["Clicker lv.1", "Clicker lv.2", "Clicker lv.3"],
+		bDesc: ["Autoclicks once each tick with lesser force", "Autoclicks 2x each tick", "Autoclicks 5x each tick"],
+		uName: ["Better Clicking", "Bettest Clicking", "Interest"],
+		uDesc: ["Clicking on your own gives 1 money more!", "Clicking on your own gives another 2 money more!", "Autoclicking gives 50% more money!"]
+	}
 };
 
-var englishText = {
-    changeLanguage: "Change Language",
-    money: "Money",
-    moneyOnSec: "Money/sec",
-    clicksOnSec: "Clicks/sec",
-    maxMoney: "Max money",
-    price: "Price",
-    buy: "Buy",
-    buyMax: "Buy max",
-    tick: "Tick",
-    bName: ["Clicker lv.1", "Clicker lv.2"],
-    bDesc: ["Autoclicks once each tick", "Autoclicks 10x each tick"],
-    uName: ["Better Clicking", "Bettest Clicking", "Interest"],
-    uDesc: ["Clicking on your own gives 1 money more!", "Clicking on your own gives another 2 money more!", "Autoclicking gives 50% more money!"]
+var necromancerClicker = {
+	logic: {
+		buildingList: [{
+			bId: 0,
+			icon: null,
+			baseCost: 15,
+			prod: 1
+		}, {
+			bId: 1,
+			icon: null,
+			baseCost: 50,
+			prod: 3
+		}, {
+			bId: 2,
+			icon: null,
+			baseCost: 250,
+			prod: 5
+		}],
+		upgradeList: [{
+			uId: 0,
+			icon: null,
+			baseCost: 10,
+			effectId: 0,
+			effectPow: 1
+		}, {
+			uId: 1,
+			icon: null,
+			baseCost: 50,
+			effectId: 0,
+			effectPow: 2
+		}, {
+			uId: 2,
+			icon: null,
+			baseCost: 90,
+			effectId: 1,
+			effectPow: 1.5
+		}, {
+			uId: 3,
+			icon: null,
+			baseCost: 10,
+			effectId: 3,
+			effectPow: 0.5
+		}, {
+			uId: 4,
+			icon: null,
+			baseCost: 10,
+			effectId: 4,
+			effectPow: 0.5
+		}, {
+			uId: 5,
+			icon: null,
+			baseCost: 10,
+			effectId: 5,
+			effectPow: 0.5
+		}, {
+			uId: 6,
+			icon: null,
+			baseCost: 10,
+			effectId: 6,
+			effectPow: 0.5
+		}]
+	},
+	polish: {
+		changeLanguage: "Zmień język",
+		money: "Kliknięcia",
+		moneyOnSec: "Zysk/sek",
+		clicksOnSec: "Kliknięcia/sek",
+		maxMoney: "Max kasy",
+		price: "Cena",
+		buy: "Kup",
+		buyMax: "Kup Max",
+		tick: "Takt",
+		bName: ["Klikacz lv.1", "Klikacz lv.2", "Klikacz lv.3"],
+		bDesc: ["Automatycznie klika za ciebie co takt z połową siły", "Automatycznie klika za ciebie 2x co takt", "Automatycznie klika za ciebie 5x co takt"],
+		uName: ["Lepsze Klikanie", "Lepsiejsze Klikanie", "Oprocentowanie"],
+		uDesc: ["Klikanie daje o 1 kliknięcie więcej!", "Klikanie daje o kolejne 2 kliknięcia więcej!", "Zyski z autoklikania są zwiększone o 50%!"]
+	},
+	english: {
+		changeLanguage: "Change Language",
+		money: "Minions",
+		moneyOnSec: "Minions/sec",
+		clicksOnSec: "Resurrections/sec",
+		maxMoney: "Max minions",
+		price: "Minions needed",
+		buy: "Attack",
+		buyMax: "Attack max",
+		tick: "Tick",
+
+		bName: ["Lonely wanderer", "Grave", "Graveyard", "Village", "City", "Fort", "Castle", "Country", "Dimension"],
+		bDesc: ["He was changed into zombie, now he helps you get more minions!", "Good place to look for a corpse to resurrect", "Many graves = many corpses!", "Overtaken village", "City", "Fort", "Castle", "Country", "Dimension"],
+		uName: ["Better incantations", "Black Book", "Armored minions", "CostLow", "BuildCostLow", "UpgCostLow", "TickLow"],
+		uDesc: ["Some shady guy offered you a scroll with incantations. Thanks to it you resurrect 1 minion more at once!", "You heard about some good ol' necromancer stuff in a guarded crypt. You heard it allows to resurrect another 2 minions more at once!", "You bought buckets for your minions. Their head is safer and they are 50% tougher thanks to your amazing thinking skills", "Bla"]
+	}
 };
 
-var texts = polishText;
+var usedModule = necromancerClicker;
+var defaultLang = "english";
 
-var buildingList = [{
-    bId: 0,
-    icon: null,
-    baseCost: 10,
-    prod: 1
-}, {
-    bId: 1,
-    icon: null,
-    baseCost: 100,
-    prod: 10
-}];
-
-var upgradeList = [{
-    uId: 0,
-    icon: null,
-    baseCost: 10
-}, {
-    uId: 1,
-    icon: null,
-    baseCost: 50
-}, {
-    uId: 2,
-    icon: null,
-    baseCost: 90
-}];
+var roundToNDecimal = function roundToNDecimal(number, n) {
+	var pow = Math.pow(10, n);
+	number = Math.round(number * pow * 10) / (pow * 10);
+	number = Math.round(number * pow) / pow;
+	return number;
+};
 
 var Building = function (_React$Component) {
-    _inherits(Building, _React$Component);
+	_inherits(Building, _React$Component);
 
-    function Building() {
-        var _ref;
+	function Building() {
+		var _ref;
 
-        var _temp, _this, _ret;
+		var _temp, _this, _ret;
 
-        _classCallCheck(this, Building);
+		_classCallCheck(this, Building);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Building.__proto__ || Object.getPrototypeOf(Building)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function (event) {
-            _this.props.methodClick(_this.props.bId);
-        }, _this.handleBuyMax = function (event) {
-            _this.props.methodClickMax(_this.props.bId);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
-    }
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Building.__proto__ || Object.getPrototypeOf(Building)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function (event) {
+			_this.props.methodClick(_this.props.bId);
+		}, _this.handleBuyMax = function (event) {
+			_this.props.methodClickMax(_this.props.bId);
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
 
-    _createClass(Building, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: 'building' },
-                _react2.default.createElement('img', { src: this.props.icon }),
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    this.props.name,
-                    ':',
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'buildNumber' },
-                        this.props.quant
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    texts.price,
-                    ':',
-                    this.props.cost
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    texts.moneyOnSec,
-                    ':',
-                    this.props.prof
-                ),
-                this.props.money >= this.props.cost ? _react2.default.createElement(
-                    'button',
-                    { onClick: this.handleClick },
-                    texts.buy
-                ) : _react2.default.createElement('div', null),
-                this.props.money >= this.props.cost ? _react2.default.createElement(
-                    'button',
-                    { onClick: this.handleBuyMax },
-                    texts.buyMax
-                ) : _react2.default.createElement('div', null)
-            );
-        }
-    }]);
+	_createClass(Building, [{
+		key: 'render',
+		value: function render() {
+			var texts = usedModule[this.props.lang];
+			return _react2.default.createElement(
+				'div',
+				{ className: 'building' },
+				_react2.default.createElement('img', { src: this.props.icon }),
+				_react2.default.createElement(
+					'h1',
+					null,
+					this.props.name,
+					':',
+					_react2.default.createElement(
+						'span',
+						{ className: 'buildNumber' },
+						this.props.quant
+					)
+				),
+				_react2.default.createElement(
+					'h2',
+					null,
+					this.props.desc
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					texts.price,
+					':',
+					this.props.cost.toFixed(2)
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					texts.moneyOnSec,
+					':',
+					this.props.prof.toFixed(2)
+				),
+				this.props.money >= this.props.cost ? _react2.default.createElement(
+					'button',
+					{ onClick: this.handleClick },
+					texts.buy
+				) : _react2.default.createElement('div', null),
+				this.props.money >= this.props.cost ? _react2.default.createElement(
+					'button',
+					{ onClick: this.handleBuyMax },
+					texts.buyMax
+				) : _react2.default.createElement('div', null)
+			);
+		}
+	}]);
 
-    return Building;
+	return Building;
 }(_react2.default.Component);
 
 var Shop = function (_React$Component2) {
-    _inherits(Shop, _React$Component2);
+	_inherits(Shop, _React$Component2);
 
-    function Shop() {
-        _classCallCheck(this, Shop);
+	function Shop() {
+		_classCallCheck(this, Shop);
 
-        return _possibleConstructorReturn(this, (Shop.__proto__ || Object.getPrototypeOf(Shop)).apply(this, arguments));
-    }
+		return _possibleConstructorReturn(this, (Shop.__proto__ || Object.getPrototypeOf(Shop)).apply(this, arguments));
+	}
 
-    _createClass(Shop, [{
-        key: 'render',
-        value: function render() {
-            var _this3 = this;
+	_createClass(Shop, [{
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
 
-            return _react2.default.createElement(
-                'ul',
-                { className: 'shop' },
-                buildingList.map(function (el, index) {
-                    return _this3.props.maxMoney * 2 >= _this3.props.buildCosts[index] || index === 0 ? _react2.default.createElement(Building, {
-                        bId: el.bId,
-                        methodClick: _this3.props.methodClick,
-                        methodClickMax: _this3.props.methodClickMax,
-                        key: "Building" + index,
-                        name: texts.bName[index],
-                        desc: texts.bDesc[index],
-                        src: el.icon,
-                        quant: _this3.props.buildings[index],
-                        cost: _this3.props.buildCosts[index],
-                        prof: _this3.props.prof[index] * _this3.props.profitMult,
-                        money: _this3.props.money }) : null;
-                })
-            );
-        }
-    }]);
+			var texts = usedModule[this.props.lang];
+			return _react2.default.createElement(
+				'ul',
+				{ className: 'shop' },
+				usedModule.logic.buildingList.map(function (el, index) {
+					return _this3.props.maxMoney * 2 >= _this3.props.buildCosts[index] || index === 0 ? _react2.default.createElement(Building, {
+						bId: el.bId,
+						methodClick: _this3.props.methodClick,
+						methodClickMax: _this3.props.methodClickMax,
+						key: "Building" + index,
+						name: texts.bName[index],
+						desc: texts.bDesc[index],
+						src: el.icon,
+						quant: _this3.props.buildings[index],
+						cost: _this3.props.buildCosts[index],
+						prof: _this3.props.prof[index] * _this3.props.profitMult,
+						money: _this3.props.money,
+						lang: _this3.props.lang }) : null;
+				})
+			);
+		}
+	}]);
 
-    return Shop;
+	return Shop;
 }(_react2.default.Component);
 
 var Upgrade = function (_React$Component3) {
-    _inherits(Upgrade, _React$Component3);
+	_inherits(Upgrade, _React$Component3);
 
-    function Upgrade(props) {
-        _classCallCheck(this, Upgrade);
+	function Upgrade(props) {
+		_classCallCheck(this, Upgrade);
 
-        var _this4 = _possibleConstructorReturn(this, (Upgrade.__proto__ || Object.getPrototypeOf(Upgrade)).call(this, props));
+		var _this4 = _possibleConstructorReturn(this, (Upgrade.__proto__ || Object.getPrototypeOf(Upgrade)).call(this, props));
 
-        _this4.handleClick = function (event) {
-            _this4.props.methodClick(_this4.props.uId);
-        };
+		_this4.handleClick = function (event) {
+			_this4.props.methodClick(_this4.props.uId, _this4.props.effectId);
+		};
 
-        return _this4;
-    }
+		return _this4;
+	}
 
-    _createClass(Upgrade, [{
-        key: 'render',
-        value: function render() {
-            var upgradeDiv = _react2.default.createElement(
-                'div',
-                { className: 'upgrade' },
-                _react2.default.createElement('img', { src: this.props.icon }),
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    this.props.name
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    this.props.desc
-                ),
-                _react2.default.createElement(
-                    'div',
-                    null,
-                    texts.price,
-                    ': ',
-                    this.props.cost
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: this.handleClick },
-                    texts.buy
-                )
-            );
-            return _react2.default.createElement(
-                'div',
-                { className: this.props.money >= this.props.cost ? "canBuy" : "cantBuy" },
-                upgradeDiv
-            );
-        }
-    }]);
+	_createClass(Upgrade, [{
+		key: 'render',
+		value: function render() {
+			var texts = usedModule[this.props.lang];
+			var upgradeDiv = _react2.default.createElement(
+				'div',
+				{ className: 'upgrade' },
+				_react2.default.createElement('img', { src: this.props.icon }),
+				_react2.default.createElement(
+					'h1',
+					null,
+					this.props.name
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					this.props.desc
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					texts.price,
+					': ',
+					this.props.cost.toFixed(2)
+				),
+				_react2.default.createElement(
+					'button',
+					{ onClick: this.handleClick },
+					texts.buy
+				)
+			);
+			return _react2.default.createElement(
+				'div',
+				{ className: this.props.money >= this.props.cost ? "canBuy" : "cantBuy" },
+				upgradeDiv
+			);
+		}
+	}]);
 
-    return Upgrade;
+	return Upgrade;
 }(_react2.default.Component);
 
 var UpgradeList = function (_React$Component4) {
-    _inherits(UpgradeList, _React$Component4);
+	_inherits(UpgradeList, _React$Component4);
 
-    function UpgradeList() {
-        _classCallCheck(this, UpgradeList);
+	function UpgradeList() {
+		_classCallCheck(this, UpgradeList);
 
-        return _possibleConstructorReturn(this, (UpgradeList.__proto__ || Object.getPrototypeOf(UpgradeList)).apply(this, arguments));
-    }
+		return _possibleConstructorReturn(this, (UpgradeList.__proto__ || Object.getPrototypeOf(UpgradeList)).apply(this, arguments));
+	}
 
-    _createClass(UpgradeList, [{
-        key: 'render',
-        value: function render() {
-            var _this6 = this;
+	_createClass(UpgradeList, [{
+		key: 'render',
+		value: function render() {
+			var _this6 = this;
 
-            return _react2.default.createElement(
-                'div',
-                { className: 'upgradeList' },
-                upgradeList.map(function (el, index) {
-                    return _this6.props.upgrades[index] === 0 && (_this6.props.maxMoney * 2 >= _this6.props.upgCosts[index] || index === 0) ? _react2.default.createElement(Upgrade, {
-                        uId: el.uId,
-                        methodClick: _this6.props.methodClick,
-                        key: "Upgrade" + index,
-                        icon: el.icon,
-                        name: texts.uName[index],
-                        desc: texts.uDesc[index],
-                        cost: _this6.props.upgCosts[index],
-                        money: _this6.props.money }) : null;
-                })
-            );
-        }
-    }]);
+			var texts = usedModule[this.props.lang];
+			return _react2.default.createElement(
+				'div',
+				{ className: 'upgradeList' },
+				usedModule.logic.upgradeList.map(function (el, index) {
+					return _this6.props.upgrades[index] === 0 && (_this6.props.maxMoney * 2 >= _this6.props.upgCosts[index] || index === 0) ? _react2.default.createElement(Upgrade, {
+						uId: el.uId,
+						effectId: el.effectId,
+						methodClick: _this6.props.methodClick,
+						key: "Upgrade" + index,
+						icon: el.icon,
+						name: texts.uName[index],
+						desc: texts.uDesc[index],
+						cost: _this6.props.upgCosts[index],
+						money: _this6.props.money,
+						lang: _this6.props.lang }) : null;
+				})
+			);
+		}
+	}]);
 
-    return UpgradeList;
+	return UpgradeList;
 }(_react2.default.Component);
 
 var MainView = function (_React$Component5) {
-    _inherits(MainView, _React$Component5);
+	_inherits(MainView, _React$Component5);
 
-    function MainView() {
-        var _ref2;
+	function MainView() {
+		var _ref2;
 
-        var _temp2, _this7, _ret2;
+		var _temp2, _this7, _ret2;
 
-        _classCallCheck(this, MainView);
+		_classCallCheck(this, MainView);
 
-        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-            args[_key2] = arguments[_key2];
-        }
+		for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+			args[_key2] = arguments[_key2];
+		}
 
-        return _ret2 = (_temp2 = (_this7 = _possibleConstructorReturn(this, (_ref2 = MainView.__proto__ || Object.getPrototypeOf(MainView)).call.apply(_ref2, [this].concat(args))), _this7), _this7.handleClick = function () {
-            _this7.props.methodClick();
-        }, _temp2), _possibleConstructorReturn(_this7, _ret2);
-    }
+		return _ret2 = (_temp2 = (_this7 = _possibleConstructorReturn(this, (_ref2 = MainView.__proto__ || Object.getPrototypeOf(MainView)).call.apply(_ref2, [this].concat(args))), _this7), _this7.handleClick = function () {
+			_this7.props.methodClick();
+		}, _temp2), _possibleConstructorReturn(_this7, _ret2);
+	}
 
-    _createClass(MainView, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: 'mainView' },
-                _react2.default.createElement('img', {
-                    onClick: this.handleClick,
-                    src: './img/mainImg.png' })
-            );
-        }
-    }]);
+	_createClass(MainView, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'mainView' },
+				_react2.default.createElement('div', {
+					onClick: this.handleClick,
+					style: { backgroundImage: "url('./img/mainImg.png')",
+						backgroundSize: "contain" } })
+			);
+		}
+	}]);
 
-    return MainView;
+	return MainView;
 }(_react2.default.Component);
 
 var App = function (_React$Component6) {
-    _inherits(App, _React$Component6);
+	_inherits(App, _React$Component6);
 
-    function App(props) {
-        _classCallCheck(this, App);
+	function App(props) {
+		_classCallCheck(this, App);
 
-        var _this8 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+		var _this8 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this8.buyBuilding = function (bId) {
-            var buildCost = _this8.state.buildCosts[bId];
-            var nextBuildCost = Math.floor(_this8.state.costMult * Math.pow(_this8.state.costIncr + bId * 0.02, _this8.state.buildings[bId] + 1) * buildingList[bId].baseCost);
+		_initialiseProps.call(_this8);
 
-            if (_this8.state.money >= buildCost) {
-                var newBuild = _this8.state.buildings;
-                newBuild[bId] += 1;
+		var buildArr = Array(usedModule.logic.buildingList.length).fill(0);
+		var upgArr = Array(usedModule.logic.upgradeList.length).fill(0);
+		var buildCosts = usedModule.logic.buildingList.map(function (el) {
+			return el.baseCost;
+		});
+		var upgCosts = usedModule.logic.upgradeList.map(function (el) {
+			return el.baseCost;
+		});
+		var prod = usedModule.logic.buildingList.map(function (el) {
+			return el.prod;
+		});
 
-                var newMoney = _this8.state.money - buildCost;
+		_this8.state = {
+			lang: defaultLang,
+			money: 0,
+			moneySec: 0,
+			click: 0,
+			lastClick: 0,
+			maxMoney: 0,
+			costIncr: 1.1,
+			buildings: buildArr,
+			buildCosts: buildCosts,
+			prod: prod,
+			upgrades: upgArr,
+			upgCosts: upgCosts,
 
-                var profits = buildingList.map(function (el, index) {
-                    return _this8.state.prod[index] * _this8.state.buildings[index];
-                });
-                var profit = profits.reduce(function (prev, curr) {
-                    return prev + curr;
-                }, 0) * _this8.state.profitMult;
+			clickPower: 1,
+			clickPowerMult: 1,
+			profitMult: 1,
+			costMult: 1,
+			buildCostMult: 1,
+			upgCostMult: 1,
+			tickTime: 1000
+		};
+		return _this8;
+	}
 
-                var newBuildCost = _this8.state.buildCosts;
-                newBuildCost[bId] = nextBuildCost;
+	_createClass(App, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var intervalId = setInterval(this.addMoney, this.state.tickTime);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var texts = usedModule[this.state.lang];
+			return _react2.default.createElement(
+				'div',
+				{ className: 'app' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'mainScreen' },
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.changeLanguage },
+						texts.changeLanguage
+					),
+					_react2.default.createElement(
+						'h1',
+						{ className: 'money' },
+						texts.money,
+						': ',
+						this.state.money.toFixed(2)
+					),
+					_react2.default.createElement(
+						'h2',
+						{ className: 'moneySec' },
+						texts.moneyOnSec,
+						': ',
+						(this.state.moneySec * (1000 / this.state.tickTime)).toFixed(2)
+					),
+					_react2.default.createElement(
+						'h3',
+						{ className: 'clicksSec' },
+						texts.clicksOnSec,
+						': ',
+						this.state.lastClick
+					),
+					_react2.default.createElement(
+						'h4',
+						null,
+						texts.maxMoney,
+						': ',
+						this.state.maxMoney.toFixed(2)
+					),
+					_react2.default.createElement(MainView, { methodClick: this.mainClick })
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'buy' },
+					_react2.default.createElement(Shop, { buildings: this.state.buildings,
+						methodClick: this.buyBuilding,
+						methodClickMax: this.buyMaxBuilding,
+						buildCosts: this.state.buildCosts,
+						prof: this.state.prod,
+						profitMult: this.state.profitMult,
+						money: this.state.money,
+						maxMoney: this.state.maxMoney,
+						lang: this.state.lang }),
+					_react2.default.createElement(UpgradeList, { methodClick: this.buyUpgrade,
+						upgCosts: this.state.upgCosts,
+						upgrades: this.state.upgrades,
+						money: this.state.money,
+						maxMoney: this.state.maxMoney,
+						lang: this.state.lang })
+				)
+			);
+		}
+	}]);
 
-                _this8.setState({
-                    buildings: newBuild,
-                    money: newMoney,
-                    moneySec: profit,
-                    buildCosts: newBuildCost
-                });
-            }
-        };
-
-        _this8.buyMaxBuilding = function (bId) {
-            var buildCost = _this8.state.buildCosts[bId];
-            var nextBuildCost = Math.floor(_this8.state.costMult * Math.pow(_this8.state.costIncr + bId * 0.02, _this8.state.buildings[bId] + 1) * buildingList[bId].baseCost);
-            var money = _this8.state.money;
-            var newBuild = _this8.state.buildings;
-
-            if (money >= buildCost) {
-                while (money >= buildCost) {
-                    newBuild[bId] += 1;
-                    money -= buildCost;
-                    buildCost = nextBuildCost;
-                    nextBuildCost = Math.floor(_this8.state.costMult * Math.pow(_this8.state.costIncr + bId * 0.02, newBuild[bId] + 1) * buildingList[bId].baseCost);
-                }
-                var newBuildCost = _this8.state.buildCosts;
-                newBuildCost[bId] = buildCost;
-
-                var profits = buildingList.map(function (el, index) {
-                    return _this8.state.prod[index] * _this8.state.buildings[index];
-                });
-                var profit = profits.reduce(function (prev, curr) {
-                    return prev + curr;
-                }, 0) * _this8.state.profitMult;
-
-                _this8.setState({
-                    buildings: newBuild,
-                    money: money,
-                    moneySec: profit,
-                    buildCosts: newBuildCost
-                });
-            }
-        };
-
-        _this8.buyUpgrade = function (uId) {
-            if (_this8.state.upgrades[uId] === 1) return;
-
-            var upgCost = _this8.state.upgCosts[uId];
-            if (_this8.state.money >= upgCost) {
-                var newUpgs = _this8.state.upgrades;
-                newUpgs[uId] += 1;
-
-                switch (uId) {
-                    case 0:
-                        _this8.setState({ clickPower: _this8.state.clickPower + 1 });
-                        break;
-                    case 1:
-                        _this8.setState({ clickPower: _this8.state.clickPower + 2 });
-                        break;
-                    case 2:
-                        var newProfMult = _this8.state.profitMult * 1.5;
-
-                        var profits = buildingList.map(function (el, index) {
-                            return _this8.state.prod[index] * _this8.state.buildings[index];
-                        });
-                        var profit = profits.reduce(function (prev, curr) {
-                            return prev + curr;
-                        }, 0) * newProfMult;
-
-                        _this8.setState({
-                            moneySec: profit,
-                            profitMult: newProfMult
-                        });
-                        break;
-                }
-
-                var newMoney = _this8.state.money;
-                newMoney -= upgCost;
-                _this8.setState({
-                    money: newMoney
-                });
-            }
-        };
-
-        _this8.mainClick = function () {
-            var newMoney = _this8.state.money + _this8.state.clickPower * _this8.state.clickPowerMult;
-            var newMaxMoney = _this8.state.maxMoney > newMoney ? _this8.state.maxMoney : newMoney;
-
-            _this8.setState({
-                money: newMoney,
-                click: _this8.state.click + 1,
-                maxMoney: newMaxMoney
-            });
-        };
-
-        _this8.addMoney = function () {
-            var newMoney = _this8.state.money + _this8.state.moneySec;
-            var newMaxMoney = _this8.state.maxMoney > newMoney ? _this8.state.maxMoney : newMoney;
-
-            _this8.setState({
-                money: newMoney,
-                lastClick: _this8.state.click,
-                click: 0,
-                maxMoney: newMaxMoney
-            });
-        };
-
-        _this8.changeLanguage = function () {
-            if (_this8.state.lang === "polish") {
-                _this8.setState({
-                    lang: "english"
-                });
-                texts = englishText;
-            } else if (_this8.state.lang === "english") {
-                _this8.setState({
-                    lang: "polish"
-                });
-                texts = polishText;
-            }
-        };
-
-        var buildArr = Array(buildingList.length).fill(0);
-        var upgArr = Array(upgradeList.length).fill(0);
-        var buildCosts = buildingList.map(function (el) {
-            return el.baseCost;
-        });
-        var upgCosts = upgradeList.map(function (el) {
-            return el.baseCost;
-        });
-        var prod = buildingList.map(function (el) {
-            return el.prod;
-        });
-
-        _this8.state = {
-            lang: "polish",
-            money: 0,
-            moneySec: 0,
-            buildings: buildArr,
-            buildCosts: buildCosts,
-            prod: prod,
-            upgrades: upgArr,
-            upgCosts: upgCosts,
-            clickPower: 1,
-            clickPowerMult: 1,
-            profitMult: 1,
-            costMult: 1,
-            costIncr: 1.1,
-            click: 0,
-            lastClick: 0,
-            tickTime: 1000,
-            maxMoney: 0
-        };
-        return _this8;
-    }
-
-    _createClass(App, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var intervalId = setInterval(this.addMoney, this.state.tickTime);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: 'app' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'mainScreen' },
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.changeLanguage },
-                        texts.changeLanguage
-                    ),
-                    _react2.default.createElement(
-                        'h1',
-                        { className: 'money' },
-                        texts.money,
-                        ': ',
-                        this.state.money
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        { className: 'moneySec' },
-                        texts.moneyOnSec,
-                        ': ',
-                        this.state.moneySec
-                    ),
-                    _react2.default.createElement(
-                        'h3',
-                        { className: 'clicksSec' },
-                        texts.clicksOnSec,
-                        ': ',
-                        this.state.lastClick
-                    ),
-                    _react2.default.createElement(
-                        'h4',
-                        null,
-                        texts.maxMoney,
-                        ': ',
-                        this.state.maxMoney
-                    ),
-                    _react2.default.createElement(MainView, { methodClick: this.mainClick })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'buy' },
-                    _react2.default.createElement(Shop, { buildings: this.state.buildings,
-                        methodClick: this.buyBuilding,
-                        methodClickMax: this.buyMaxBuilding,
-                        buildCosts: this.state.buildCosts,
-                        prof: this.state.prod,
-                        profitMult: this.state.profitMult,
-                        money: this.state.money,
-                        maxMoney: this.state.maxMoney }),
-                    _react2.default.createElement(UpgradeList, { methodClick: this.buyUpgrade,
-                        upgCosts: this.state.upgCosts,
-                        upgrades: this.state.upgrades,
-                        money: this.state.money,
-                        maxMoney: this.state.maxMoney })
-                )
-            );
-        }
-    }]);
-
-    return App;
+	return App;
 }(_react2.default.Component);
 
+var _initialiseProps = function _initialiseProps() {
+	var _this9 = this;
+
+	this.calcCosts = function (newCostMult, newBuildCostMult, newUpgCostMult) {
+		var costMult = newCostMult;
+		var buildCostMult = newBuildCostMult;
+		var upgCostMult = newUpgCostMult;
+		var buildCosts = usedModule.logic.buildingList.map(function (el) {
+			return el.baseCost * costMult * buildCostMult;
+		});
+		var upgCosts = usedModule.logic.upgradeList.map(function (el) {
+			return el.baseCost * costMult * upgCostMult;
+		});
+
+		_this9.setState({
+			costMult: costMult,
+			buildCosts: buildCosts,
+			upgCosts: upgCosts
+		});
+		console.log(costMult, buildCostMult, upgCostMult, buildCosts, upgCosts);
+	};
+
+	this.calcProfits = function () {
+		var profits = usedModule.logic.buildingList.map(function (el, index) {
+			return _this9.state.prod[index] * _this9.state.buildings[index];
+		});
+		var profit = profits.reduce(function (prev, curr) {
+			return prev + curr;
+		}, 0) * _this9.state.profitMult;
+
+		_this9.setState({ moneySec: profit });
+	};
+
+	this.changeClickPower = function (n) {
+		_this9.setState({ clickPower: _this9.state.clickPower + n });
+	};
+
+	this.changeClickPowerMult = function (n) {
+		_this9.setState({ clickPowerMult: _this9.state.clickPowerMult * n });
+	};
+
+	this.changeProfitMult = function (n) {
+		var newProfMult = _this9.state.profitMult * n;
+
+		_this9.setState({ profitMult: newProfMult });
+		_this9.calcProfits();
+	};
+
+	this.changeCostMult = function (n) {
+		_this9.setState({ costMult: _this9.state.costMult * n });
+		_this9.calcCosts(_this9.state.costMult * n, _this9.state.buildCostMult, _this9.state.upgCostMult);
+	};
+
+	this.changeBuildCostMult = function (n) {
+		_this9.setState({ buildCostMult: _this9.state.buildCostMult * n });
+		_this9.calcCosts(_this9.state.costMult, _this9.state.buildCostMult * n, _this9.state.upgCostMult);
+	};
+
+	this.changeUpgCostMult = function (n) {
+		_this9.setState({ upgCostMult: _this9.state.upgCostMult * n });
+		_this9.calcCosts(_this9.state.costMult, _this9.state.buildCostMult, _this9.state.upgCostMult * n);
+	};
+
+	this.changeTickTime = function (n) {
+		_this9.setState({ tickTime: _this9.state.tickTime * n });
+	};
+
+	this.buyBuilding = function (bId) {
+		var buildCost = _this9.state.buildCosts[bId];
+		var nextBuildCost = _this9.state.costMult * Math.pow(_this9.state.costIncr + bId * 0.02, _this9.state.buildings[bId] + 1) * usedModule.logic.buildingList[bId].baseCost;
+		nextBuildCost = roundToNDecimal(nextBuildCost, 2);
+		buildCost = roundToNDecimal(buildCost, 2);
+
+		if (_this9.state.money >= buildCost) {
+			var newBuild = _this9.state.buildings;
+			newBuild[bId] += 1;
+
+			var newMoney = _this9.state.money - buildCost;
+			newMoney = roundToNDecimal(newMoney, 2);
+
+			var profits = usedModule.logic.buildingList.map(function (el, index) {
+				return _this9.state.prod[index] * _this9.state.buildings[index];
+			});
+			var profit = profits.reduce(function (prev, curr) {
+				return prev + curr;
+			}, 0) * _this9.state.profitMult;
+			profit = roundToNDecimal(profit, 2);
+
+			var newBuildCost = _this9.state.buildCosts;
+			newBuildCost[bId] = nextBuildCost;
+
+			_this9.setState({
+				buildings: newBuild,
+				money: newMoney,
+				moneySec: profit,
+				buildCosts: newBuildCost
+			});
+		}
+	};
+
+	this.buyMaxBuilding = function (bId) {
+		var buildCost = _this9.state.buildCosts[bId];
+		var nextBuildCost = Math.floor(_this9.state.costMult * Math.pow(_this9.state.costIncr + bId * 0.02, _this9.state.buildings[bId] + 1) * usedModule.logic.buildingList[bId].baseCost);
+		var money = _this9.state.money;
+		var newBuild = _this9.state.buildings;
+
+		if (money >= buildCost) {
+			while (money >= buildCost) {
+				newBuild[bId] += 1;
+				money -= buildCost;
+				buildCost = nextBuildCost;
+				nextBuildCost = Math.floor(_this9.state.costMult * Math.pow(_this9.state.costIncr + bId * 0.02, newBuild[bId] + 1) * usedModule.logic.buildingList[bId].baseCost);
+			}
+			var newBuildCost = _this9.state.buildCosts;
+			newBuildCost[bId] = buildCost;
+
+			var profits = usedModule.logic.buildingList.map(function (el, index) {
+				return _this9.state.prod[index] * _this9.state.buildings[index];
+			});
+			var profit = profits.reduce(function (prev, curr) {
+				return prev + curr;
+			}, 0) * _this9.state.profitMult;
+
+			_this9.setState({
+				buildings: newBuild,
+				money: money,
+				moneySec: profit,
+				buildCosts: newBuildCost
+			});
+		}
+	};
+
+	this.buyUpgrade = function (uId, effectId) {
+		if (_this9.state.upgrades[uId] === 1) return;
+
+		var upgCost = _this9.state.upgCosts[uId];
+		if (_this9.state.money >= upgCost) {
+			var newUpgs = _this9.state.upgrades;
+			newUpgs[uId] = 1;
+
+			var effectPow = usedModule.logic.upgradeList[uId].effectPow;
+
+			switch (effectId) {
+				case 0:
+					_this9.changeClickPower(effectPow);
+					break;
+				case 1:
+					_this9.changeProfitMult(effectPow);
+					break;
+				case 2:
+					_this9.changeClickPowerMult(effectPow);
+					break;
+				case 3:
+					_this9.changeCostMult(effectPow);
+					break;
+				case 4:
+					_this9.changeBuildCostMult(effectPow);
+					break;
+				case 5:
+					_this9.changeUpgCostMult(effectPow);
+					break;
+				case 6:
+					_this9.changeTickTime(effectPow);
+					break;
+			}
+
+			var newMoney = _this9.state.money;
+			newMoney -= upgCost;
+			_this9.setState({
+				money: newMoney
+			});
+		}
+	};
+
+	this.mainClick = function () {
+		var newMoney = _this9.state.money + _this9.state.clickPower * _this9.state.clickPowerMult;
+		var newMaxMoney = _this9.state.maxMoney > newMoney ? _this9.state.maxMoney : newMoney;
+
+		_this9.setState({
+			money: newMoney,
+			click: _this9.state.click + 1,
+			maxMoney: newMaxMoney
+		});
+	};
+
+	this.addMoney = function () {
+		var newMoney = Math.round((_this9.state.money + _this9.state.moneySec) * 1000) / 1000;
+		newMoney = Math.round(newMoney * 100) / 100;
+		var newMaxMoney = _this9.state.maxMoney > newMoney ? _this9.state.maxMoney : newMoney;
+
+		_this9.setState({
+			money: newMoney,
+			lastClick: _this9.state.click,
+			click: 0,
+			maxMoney: newMaxMoney
+		});
+	};
+
+	this.changeLanguage = function () {
+		if (_this9.state.lang === "polish") {
+			_this9.setState({
+				lang: "english"
+			});
+		} else if (_this9.state.lang === "english") {
+			_this9.setState({
+				lang: "polish"
+			});
+		}
+
+		texts = _module[_this9.state.lang];
+	};
+};
+
 document.addEventListener('DOMContentLoaded', function () {
-    _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 });
 
 /***/ }),
