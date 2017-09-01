@@ -11,81 +11,6 @@ import {
 }
 	from 'react-router';
 
-let module= {
-	polish: 
-	{
-		changeLanguage: "Zmień język",
-		money:          "Kliknięcia",
-		moneyOnSec:     "Zysk/sek",
-		clicksOnSec:    "Kliknięcia/sek",
-		maxMoney:       "Max kasy",
-		price:          "Cena",
-		buy:            "Kup",
-		buyMax:         "Kup Max",
-		tick:           "Takt", 
-		bName:
-		[
-			"Klikacz lv.1",
-			"Klikacz lv.2",
-			"Klikacz lv.3",
-		],
-		bDesc:
-		[
-			"Automatycznie klika za ciebie co takt z połową siły",
-			"Automatycznie klika za ciebie 2x co takt",
-			"Automatycznie klika za ciebie 5x co takt"
-		],
-		uName:
-		[
-			"Lepsze Klikanie",
-			"Lepsiejsze Klikanie",
-			"Oprocentowanie"
-		],
-		uDesc:
-		[
-			"Klikanie daje o 1 kliknięcie więcej!",
-			"Klikanie daje o kolejne 2 kliknięcia więcej!",
-			"Zyski z autoklikania są zwiększone o 50%!"
-		],
-	},
-	english: 
-	{
-		changeLanguage: "Change Language",
-		money:          "Money",
-		moneyOnSec:     "Money/sec",
-		clicksOnSec:    "Clicks/sec",
-		maxMoney:       "Max money",
-		price:          "Price",
-		buy:            "Buy",
-		buyMax:         "Buy max",
-		tick:           "Tick",
-		bName:
-		[
-			"Clicker lv.1",
-			"Clicker lv.2",
-			"Clicker lv.3",
-		],
-		bDesc:
-		[
-			"Autoclicks once each tick with lesser force",
-			"Autoclicks 2x each tick",
-			"Autoclicks 5x each tick",
-		],
-		uName:
-		[
-			"Better Clicking",
-			"Bettest Clicking",
-			"Interest"
-		],
-		uDesc:
-		[
-			"Clicking on your own gives 1 money more!",
-			"Clicking on your own gives another 2 money more!",
-			"Autoclicking gives 50% more money!"
-		],
-	}
-};
-
 let necromancerClicker= {
 	logic:
 	{
@@ -162,6 +87,15 @@ let necromancerClicker= {
 				effectPow:0.5,
 			},
 		],
+		imgs:
+		{
+			clickedObject: "./img/mainImg.png",
+			background: "./img/background.png",
+			shopBackground: "./img/shop.png",
+			upgradesBackground: "./img/upgrades.png",
+			buildingBackground: "./img/building.png",
+			upgradeBackground: "./img/upgrade.png",
+		}
 	},
 	polish: 
 	{
@@ -255,7 +189,232 @@ let necromancerClicker= {
 	}
 };
 
-let usedModule=necromancerClicker;
+let smithClicker= {
+	logic:
+	{
+		buildingList:
+		[
+			{
+				bId: 0,
+				icon: "./img/mallet.png",        
+				baseCost: 5,
+				prod: 3,
+			},
+			{
+				bId: 1,
+				icon: "./img/anvil.png",       
+				baseCost: 15,
+				prod: 10,
+			},
+			{
+				bId: 2,
+				icon: null,
+				baseCost: 40,
+				prod: 50
+			},
+			{
+				bId: 3,
+				icon: null,       
+				baseCost: 50,
+				prod: 100,
+			},
+			{
+				bId: 4,
+				icon: null,       
+				baseCost:60,
+				prod: 200,
+			},
+			{
+				bId: 5,
+				icon: null,       
+				baseCost: 90,
+				prod: 300,
+			},
+			{
+				bId: 6,
+				icon: null,       
+				baseCost: 110,
+				prod: 500,
+			},
+			{
+				bId: 7,
+				icon: null,       
+				baseCost: 130,
+				prod: 600,
+			},
+			{
+				bId: 8,
+				icon: null,       
+				baseCost: 150,
+				prod: 1000,
+			},
+			{
+				bId: 9,
+				icon: null,       
+				baseCost: 200,
+				prod: 2000,
+			},
+		],
+		upgradeList:
+		[
+			{
+				uId:0,
+				icon: null,
+				baseCost:5,
+				effectId: 0,
+				effectPow: 1,
+			},
+			{
+				uId:1,
+				icon: null,
+				baseCost: 15,
+				effectId: 0,
+				effectPow: 2,
+			},
+			{
+				uId:2,
+				icon: null,
+				baseCost: 25,
+				effectId: 1,
+				effectPow: 1.5,
+			},
+			{
+				uId:3,
+				icon:null,
+				baseCost:40,
+				effectId:3,
+				effectPow:0.5,
+			},
+			{
+				uId:4,
+				icon:null,
+				baseCost:60,
+				effectId:4,
+				effectPow:0.5,
+			},
+			{
+				uId:5,
+				icon:null,
+				baseCost:75,
+				effectId:5,
+				effectPow:0.5,
+			},
+			{
+				uId:6,
+				icon:null,
+				baseCost:100,
+				effectId:6,
+				effectPow:0.5,
+			},
+		],
+		imgs:
+		{
+			clickedObject: "./img/mainImg.png",
+			background: null, //"./img/background.png"
+			shopBackground: "./img/shop.png",
+			upgradesBackground: "./img/upgrades.png",
+			buildingBackground: "./img/building.png",
+			upgradeBackground: "./img/upgrade.png",
+		}
+	},
+	polish: 
+	{
+		changeLanguage: "Zmień język",
+		money:          "Pieniądze",
+		moneyOnSec:     "Pieniądze/sek",
+		clicksOnSec:    "Uderzenia/sek",
+		maxMoney:       "Max pieniędzy",
+		price:          "Cena",
+		buy:            "Kup",
+		buyMax:         "Kup Max",
+		tick:           "Takt", 
+		bName:
+		[
+			"Młot kowalski",
+			"Kowadło",
+			"",
+		],
+		bDesc:
+		[
+			"Automatycznie klika za ciebie co takt z połową siły",
+			"Automatycznie klika za ciebie 2x co takt",
+			"Automatycznie klika za ciebie 5x co takt"
+		],
+		uName:
+		[
+			"Lepsze Klikanie",
+			"Lepsiejsze Klikanie",
+			"Oprocentowanie"
+		],
+		uDesc:
+		[
+			"Klikanie daje o 1 kliknięcie więcej!",
+			"Klikanie daje o kolejne 2 kliknięcia więcej!",
+			"Zyski z autoklikania są zwiększone o 50%!"
+		],
+	},
+	english: 
+	{
+		changeLanguage: "Change Language",
+		money:          "Money($)",
+		moneyOnSec:     "Money/sec",
+		clicksOnSec:    "Hits/sec",
+		maxMoney:       "Max money",
+		price:          "Cost",
+		buy:            "Buy",
+		buyMax:         "Buy max",
+		tick:           "Tick",
+
+		bName:
+		[
+			"Hammer",
+			"Anvil",
+			"Peon",
+			"Novice Smith",
+			"Apprentice Smith",
+			"Adept Smith",
+			"Expert Smith",
+			"Master Smith",
+			"Legendary Smith",
+			"Agent Smith"
+		],
+		bDesc:
+		[
+			"Basic smithing tool",
+			"It's better to smith on this than on the ground",
+			"Just a villager with hammer",
+			"That guy had smithing hammer in hands once",
+			"That man is amazing! He even doesn't hit his fingers. Usually.",
+			"He knows what he is doing",
+			"You haven't thought it is possible to smith two swords at once, but this smith can do that easily",
+			"He is smithing so fast you can barely see his hands",
+			"You heard 500 year old tales about that man, how he got here?",
+			"He just sits on a chair and swords appear in front of him from thin air"
+		],
+		uName:
+		[
+			"Leather handles",
+			"Stronger hammer",
+			"Better Iron",
+			"Cheap materials",
+			"Free beer promise",
+			"Befriend shop owner",
+			"Local spacetime expander"
+		],
+		uDesc:
+		[
+			"Leather handles make your hammer don't slip away. You get 1$ more with each hit",
+			"Your hammer is stronger, you need less hits to make a sword. You get 2$ more with each hit",
+			"You bought iron of better quality. You get 50% more money/sec",
+			"You made sure you get best offer on materials, everything costs you 50% less",
+			"You promised free beer for all smiths. You can recruit new smiths 50% cheaper",
+			"Upgrade shop owner is now your friend, he sells you stuff 50% cheaper",
+			"This AMAZING machine makes time flow differently in small area. Your production rate is increased twice"
+		],
+	}
+};
+
+let usedModule=smithClicker;
 let defaultLang="english";
 
 let roundToNDecimal = (number,n) => {
@@ -276,7 +435,8 @@ class Building extends React.Component
 	render()
 	{
 		let texts=usedModule[this.props.lang];
-		return  <div className="building">
+		return  <div 	className="building"
+						style={{backgroundImage:"url("+usedModule.logic.imgs.buildingBackground+")"}}>
 					<img src={this.props.icon}/>
 					<h1>{this.props.name}:<span className="buildNumber">{this.props.quant}</span></h1>
 					<h2>{this.props.desc}</h2>
@@ -293,7 +453,8 @@ class Shop extends React.Component
 	render()
 	{
 		let texts=usedModule[this.props.lang];
-		return  <ul className="shop">
+		return  <ul className="shop"
+					style={{backgroundImage:"url("+usedModule.logic.imgs.shopBackground+")"}}>
 					{usedModule.logic.buildingList.map( (el,index) => 
 						this.props.maxMoney*2>=this.props.buildCosts[index] || index===0 ? <Building
 						bId={el.bId}
@@ -302,7 +463,7 @@ class Shop extends React.Component
 						key={"Building"+index}
 						name={texts.bName[index]}
 						desc={texts.bDesc[index]}
-						src={el.icon}
+						icon={el.icon}
 						quant={this.props.buildings[index]}
 						cost={this.props.buildCosts[index]}
 						prof={this.props.prof[index]*this.props.profitMult}
@@ -324,7 +485,8 @@ class Upgrade extends React.Component
 	render()
 	{
 		let texts=usedModule[this.props.lang];
-		let upgradeDiv= <div className="upgrade">
+		let upgradeDiv= <div 	className="upgrade"
+								style={{backgroundImage:"url("+usedModule.logic.imgs.upgradeBackground+")"}}>
 							<img src={this.props.icon}/>
 							<h1>{this.props.name}</h1>
 							<div>{this.props.desc}</div>
@@ -340,7 +502,8 @@ class UpgradeList extends React.Component
 	render()
 	{
 		let texts=usedModule[this.props.lang];
-		return  <div className="upgradeList">
+		return  <div 	className="upgradeList"
+						style={{backgroundImage:"url("+usedModule.logic.imgs.upgradesBackground+")"}}>
 					{usedModule.logic.upgradeList.map( (el,index) => this.props.upgrades[index]===0 && (this.props.maxMoney*2>=this.props.upgCosts[index] || index===0 )? <Upgrade
 						uId={el.uId}
 						effectId={el.effectId}
@@ -364,10 +527,9 @@ class MainView extends React.Component
 	render()
 	{
 		return  <div className="mainView">
-					<div
-						onClick={this.handleClick}
-						style={{backgroundImage: "url('./img/mainImg.png')",
-								backgroundSize: "contain"}}/>
+					<div 
+						style={{backgroundImage:"url("+usedModule.logic.imgs.clickedObject+")"}}
+						onClick={this.handleClick}/>
 				</div>;
 	}
 }
@@ -606,8 +768,9 @@ class App extends React.Component
 	render()
 	{
 		let texts=usedModule[this.state.lang];
-		return  <div className="app">
-					<div className="mainScreen">
+		return  <div 	className="app row"
+						style={{backgroundImage:"url("+usedModule.logic.imgs.background+")"}}>
+					<div className="mainScreen col-8">
 						<button onClick={this.changeLanguage}>{texts.changeLanguage}</button>
 						<h1 className="money">{texts.money}: {this.state.money.toFixed(2)}</h1>
 						<h2 className="moneySec">{texts.moneyOnSec}: {(this.state.moneySec*(1000/this.state.tickTime)).toFixed(2)}</h2>
@@ -615,7 +778,7 @@ class App extends React.Component
 						<h4>{texts.maxMoney}: {this.state.maxMoney.toFixed(2)}</h4>
 						<MainView methodClick={this.mainClick}/>
 					</div>
-					<div className="buy">
+					<div className="buy col-4">
 						<Shop   buildings={this.state.buildings}
 								methodClick={this.buyBuilding}
 								methodClickMax={this.buyMaxBuilding}
