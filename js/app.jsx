@@ -320,37 +320,60 @@ let smithClicker= {
 	polish: 
 	{
 		changeLanguage: "Zmień język",
-		money:          "Pieniądze",
+		money:          "Pieniądze (PLN)",
 		moneyOnSec:     "Pieniądze/sek",
 		clicksOnSec:    "Uderzenia/sek",
 		maxMoney:       "Max pieniędzy",
-		price:          "Cena",
+		price:          "Koszt",
 		buy:            "Kup",
-		buyMax:         "Kup Max",
-		tick:           "Takt", 
+		buyMax:         "Kup max",
+		tick:           "Takt",
+
 		bName:
 		[
-			"Młot kowalski",
+			"Młotek",
 			"Kowadło",
-			"",
+			"Robotnik",
+			"Początkujący kowal",
+			"Kowal czeladnik",
+			"Adept kowalstwa",
+			"Kowal ekspert",
+			"Mistrz kowalski",
+			"Kowal z legend",
+			"Agent Kowal"
 		],
 		bDesc:
 		[
-			"Automatycznie klika za ciebie co takt z połową siły",
-			"Automatycznie klika za ciebie 2x co takt",
-			"Automatycznie klika za ciebie 5x co takt"
+			"Podstawowe narzędzie kowala",
+			"Wykuwa się na nim wygodniej niż na ziemi",
+			"Po prostu wieśniak z młotkiem",
+			"Ten chłopak kiedyś miał w rękach młot kowalski i nawet nim raz machnął",
+			"Ten facet jest niesamowity! Nie uderza się po palcach. Zazwyczaj.",
+			"Wie co robi",
+			"Nie sądziłeś, że jest możliwe wykuwanie dwóch mieczy naraz, ale ten kowal robi to bez problemu",
+			"Uderza tak szybko że ledwo widzisz jego ręce",
+			"Słyszałeś o nim 500 letnią legendę, skąd on się tu wziął?",
+			"Po prostu siedzi na krześle, a przed pojawiają się miecze"
 		],
 		uName:
 		[
-			"Lepsze Klikanie",
-			"Lepsiejsze Klikanie",
-			"Oprocentowanie"
+			"Skórzane rączki",
+			"Silniejszy młotek",
+			"Lepsze żelazo",
+			"Tańsze materiały",
+			"Darmowe piwo",
+			"Podarek dla właściciela sklepu",
+			"Zakrzywiacz czasoprzestrzeni"
 		],
 		uDesc:
 		[
-			"Klikanie daje o 1 kliknięcie więcej!",
-			"Klikanie daje o kolejne 2 kliknięcia więcej!",
-			"Zyski z autoklikania są zwiększone o 50%!"
+			"Skórzane rączki sprawiają, że młotek ci się nie wyślizguje. Dostajesz 1 PLN więcej z każdym uderzeniem",
+			"Twój młot jest wytrzymalszy, potrzebujesz mniej uderzeń aby wykonać miecz. Dostajesz 2 PLN więcej z każdym uderzeniem",
+			"Kupiłeś żelazo lepszej jakości. Zarabiasz 50% więcej co sekundę",
+			"Upewniłeś się, że znalazłeś najlepszą ofertę materiałów, wszystko, kosztuje o połowę mniej",
+			"Obiecałeś kowalom darmowe piwo. Nowi kowale dają się nająć o połowę taniej",
+			"Właściciel sklepu z ulepszeniami bardziej cię lubi, sprzedaje ci wszystko o połowę taniej",
+			"Ta NIESAMOWITA maszyna sprawia, że na małej przestrzeni czas płynie inaczej. Zyskujesz pieniądze 2 razy szybciej"
 		],
 	},
 	english: 
