@@ -13721,109 +13721,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*jshint ignore:start*/
 
 
-var necromancerClicker = {
-	logic: {
-		buildingList: [{
-			bId: 0,
-			icon: null,
-			baseCost: 15,
-			prod: 1
-		}, {
-			bId: 1,
-			icon: null,
-			baseCost: 50,
-			prod: 3
-		}, {
-			bId: 2,
-			icon: null,
-			baseCost: 250,
-			prod: 5
-		}],
-		upgradeList: [{
-			uId: 0,
-			icon: null,
-			baseCost: 10,
-			effectId: 0,
-			effectPow: 1
-		}, {
-			uId: 1,
-			icon: null,
-			baseCost: 50,
-			effectId: 0,
-			effectPow: 2
-		}, {
-			uId: 2,
-			icon: null,
-			baseCost: 90,
-			effectId: 1,
-			effectPow: 1.5
-		}, {
-			uId: 3,
-			icon: null,
-			baseCost: 10,
-			effectId: 3,
-			effectPow: 0.5
-		}, {
-			uId: 4,
-			icon: null,
-			baseCost: 10,
-			effectId: 4,
-			effectPow: 0.5
-		}, {
-			uId: 5,
-			icon: null,
-			baseCost: 10,
-			effectId: 5,
-			effectPow: 0.5
-		}, {
-			uId: 6,
-			icon: null,
-			baseCost: 10,
-			effectId: 6,
-			effectPow: 0.5
-		}],
-		imgs: {
-			clickedObject: "./img/mainImg.png",
-			background: "./img/background.png",
-			shopBackground: "./img/shop.png",
-			upgradesBackground: "./img/upgrades.png",
-			buildingBackground: "./img/building.png",
-			upgradeBackground: "./img/upgrade.png"
-		}
-	},
-	polish: {
-		changeLanguage: "Zmień język",
-		money: "Kliknięcia",
-		moneyOnSec: "Zysk/sek",
-		clicksOnSec: "Kliknięcia/sek",
-		maxMoney: "Max kasy",
-		price: "Cena",
-		buy: "Kup",
-		buyMax: "Kup Max",
-		tick: "Takt",
-		bName: ["Klikacz lv.1", "Klikacz lv.2", "Klikacz lv.3"],
-		bDesc: ["Automatycznie klika za ciebie co takt z połową siły", "Automatycznie klika za ciebie 2x co takt", "Automatycznie klika za ciebie 5x co takt"],
-		uName: ["Lepsze Klikanie", "Lepsiejsze Klikanie", "Oprocentowanie"],
-		uDesc: ["Klikanie daje o 1 kliknięcie więcej!", "Klikanie daje o kolejne 2 kliknięcia więcej!", "Zyski z autoklikania są zwiększone o 50%!"]
-	},
-	english: {
-		changeLanguage: "Change Language",
-		money: "Minions",
-		moneyOnSec: "Minions/sec",
-		clicksOnSec: "Resurrections/sec",
-		maxMoney: "Max minions",
-		price: "Minions needed",
-		buy: "Attack",
-		buyMax: "Attack max",
-		tick: "Tick",
-
-		bName: ["Lonely wanderer", "Grave", "Graveyard", "Village", "City", "Fort", "Castle", "Country", "Dimension"],
-		bDesc: ["He was changed into zombie, now he helps you get more minions!", "Good place to look for a corpse to resurrect", "Many graves = many corpses!", "Overtaken village", "City", "Fort", "Castle", "Country", "Dimension"],
-		uName: ["Better incantations", "Black Book", "Armored minions", "CostLow", "BuildCostLow", "UpgCostLow", "TickLow"],
-		uDesc: ["Some shady guy offered you a scroll with incantations. Thanks to it you resurrect 1 minion more at once!", "You heard about some good ol' necromancer stuff in a guarded crypt. You heard it allows to resurrect another 2 minions more at once!", "You bought buckets for your minions. Their head is safer and they are 50% tougher thanks to your amazing thinking skills", "Bla"]
-	}
-};
-
 var smithClicker = {
 	logic: {
 		buildingList: [{
@@ -14274,6 +14171,9 @@ var App = function (_React$Component6) {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			var intervalId = setInterval(this.addMoney, this.state.tickTime);
+			this.setState({
+				interval: intervalId
+			});
 		}
 	}, {
 		key: 'render',
@@ -14396,22 +14296,31 @@ var _initialiseProps = function _initialiseProps() {
 	};
 
 	this.changeCostMult = function (n) {
-		_this9.setState({ costMult: _this9.state.costMult * n });
-		_this9.calcCosts(_this9.state.costMult * n, _this9.state.buildCostMult, _this9.state.upgCostMult);
+		var newCostMult = _this9.state.costMult * n;
+		_this9.setState({ costMult: newCostMult });
+		_this9.calcCosts(newCostMult, _this9.state.buildCostMult, _this9.state.upgCostMult);
 	};
 
 	this.changeBuildCostMult = function (n) {
-		_this9.setState({ buildCostMult: _this9.state.buildCostMult * n });
-		_this9.calcCosts(_this9.state.costMult, _this9.state.buildCostMult * n, _this9.state.upgCostMult);
+		var newBuildCostMult = _this9.state.buildCostMult * n;
+		_this9.setState({ buildCostMult: newBuildCostMult });
+		_this9.calcCosts(_this9.state.costMult, newBuildCostMult, _this9.state.upgCostMult);
 	};
 
 	this.changeUpgCostMult = function (n) {
-		_this9.setState({ upgCostMult: _this9.state.upgCostMult * n });
-		_this9.calcCosts(_this9.state.costMult, _this9.state.buildCostMult, _this9.state.upgCostMult * n);
+		var newUpgCostMult = _this9.state.upgCostMult * n;
+		_this9.setState({ upgCostMult: newUpgCostMult });
+		_this9.calcCosts(_this9.state.costMult, _this9.state.buildCostMult, newUpgCostMult);
 	};
 
 	this.changeTickTime = function (n) {
-		_this9.setState({ tickTime: _this9.state.tickTime * n });
+		var newTime = _this9.state.tickTime * n;
+		clearInterval(_this9.state.interval);
+		var newInter = setInterval(_this9.addMoney, newTime);
+		_this9.setState({
+			tickTime: newTime,
+			interval: newInter
+		});
 	};
 
 	this.buyBuilding = function (bId) {

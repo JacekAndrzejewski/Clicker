@@ -11,184 +11,6 @@ import {
 }
 	from 'react-router';
 
-let necromancerClicker= {
-	logic:
-	{
-		buildingList:
-		[
-			{
-				bId: 0,
-				icon: null,        
-				baseCost: 15,
-				prod: 1,
-			},
-			{
-				bId: 1,
-				icon: null,       
-				baseCost: 50,
-				prod: 3,
-			},
-			{
-				bId: 2,
-				icon: null,
-				baseCost: 250,
-				prod: 5
-			}
-		],
-		upgradeList:
-		[
-			{
-				uId:0,
-				icon: null,
-				baseCost:10,
-				effectId: 0,
-				effectPow: 1,
-			},
-			{
-				uId:1,
-				icon: null,
-				baseCost: 50,
-				effectId: 0,
-				effectPow: 2,
-			},
-			{
-				uId:2,
-				icon: null,
-				baseCost: 90,
-				effectId: 1,
-				effectPow: 1.5,
-			},
-			{
-				uId:3,
-				icon:null,
-				baseCost:10,
-				effectId:3,
-				effectPow:0.5,
-			},
-			{
-				uId:4,
-				icon:null,
-				baseCost:10,
-				effectId:4,
-				effectPow:0.5,
-			},
-			{
-				uId:5,
-				icon:null,
-				baseCost:10,
-				effectId:5,
-				effectPow:0.5,
-			},
-			{
-				uId:6,
-				icon:null,
-				baseCost:10,
-				effectId:6,
-				effectPow:0.5,
-			},
-		],
-		imgs:
-		{
-			clickedObject: "./img/mainImg.png",
-			background: "./img/background.png",
-			shopBackground: "./img/shop.png",
-			upgradesBackground: "./img/upgrades.png",
-			buildingBackground: "./img/building.png",
-			upgradeBackground: "./img/upgrade.png",
-		}
-	},
-	polish: 
-	{
-		changeLanguage: "Zmień język",
-		money:          "Kliknięcia",
-		moneyOnSec:     "Zysk/sek",
-		clicksOnSec:    "Kliknięcia/sek",
-		maxMoney:       "Max kasy",
-		price:          "Cena",
-		buy:            "Kup",
-		buyMax:         "Kup Max",
-		tick:           "Takt", 
-		bName:
-		[
-			"Klikacz lv.1",
-			"Klikacz lv.2",
-			"Klikacz lv.3",
-		],
-		bDesc:
-		[
-			"Automatycznie klika za ciebie co takt z połową siły",
-			"Automatycznie klika za ciebie 2x co takt",
-			"Automatycznie klika za ciebie 5x co takt"
-		],
-		uName:
-		[
-			"Lepsze Klikanie",
-			"Lepsiejsze Klikanie",
-			"Oprocentowanie"
-		],
-		uDesc:
-		[
-			"Klikanie daje o 1 kliknięcie więcej!",
-			"Klikanie daje o kolejne 2 kliknięcia więcej!",
-			"Zyski z autoklikania są zwiększone o 50%!"
-		],
-	},
-	english: 
-	{
-		changeLanguage: "Change Language",
-		money:          "Minions",
-		moneyOnSec:     "Minions/sec",
-		clicksOnSec:    "Resurrections/sec",
-		maxMoney:       "Max minions",
-		price:          "Minions needed",
-		buy:            "Attack",
-		buyMax:         "Attack max",
-		tick:           "Tick",
-
-		bName:
-		[
-			"Lonely wanderer",
-			"Grave",
-			"Graveyard",
-			"Village",
-			"City",
-			"Fort",
-			"Castle",
-			"Country",
-			"Dimension"
-		],
-		bDesc:
-		[
-			"He was changed into zombie, now he helps you get more minions!",
-			"Good place to look for a corpse to resurrect",
-			"Many graves = many corpses!",
-			"Overtaken village",
-			"City",
-			"Fort",
-			"Castle",
-			"Country",
-			"Dimension"
-		],
-		uName:
-		[
-			"Better incantations",
-			"Black Book",
-			"Armored minions",
-			"CostLow",
-			"BuildCostLow",
-			"UpgCostLow",
-			"TickLow"
-		],
-		uDesc:
-		[
-			"Some shady guy offered you a scroll with incantations. Thanks to it you resurrect 1 minion more at once!",
-			"You heard about some good ol' necromancer stuff in a guarded crypt. You heard it allows to resurrect another 2 minions more at once!",
-			"You bought buckets for your minions. Their head is safer and they are 50% tougher thanks to your amazing thinking skills",
-			"Bla"
-		],
-	}
-};
-
 let smithClicker= {
 	logic:
 	{
@@ -196,13 +18,13 @@ let smithClicker= {
 		[
 			{
 				bId: 0,
-				icon: "./img/mallet.png",        
+				icon: "./img/mallet.png",
 				baseCost: 5,
 				prod: 3,
 			},
 			{
 				bId: 1,
-				icon: "./img/anvil.png",       
+				icon: "./img/anvil.png",
 				baseCost: 15,
 				prod: 10,
 			},
@@ -214,43 +36,43 @@ let smithClicker= {
 			},
 			{
 				bId: 3,
-				icon: null,       
+				icon: null,
 				baseCost: 50,
 				prod: 100,
 			},
 			{
 				bId: 4,
-				icon: null,       
+				icon: null,
 				baseCost:60,
 				prod: 200,
 			},
 			{
 				bId: 5,
-				icon: null,       
+				icon: null,
 				baseCost: 90,
 				prod: 300,
 			},
 			{
 				bId: 6,
-				icon: null,       
+				icon: null,
 				baseCost: 110,
 				prod: 500,
 			},
 			{
 				bId: 7,
-				icon: null,       
+				icon: null,
 				baseCost: 130,
 				prod: 600,
 			},
 			{
 				bId: 8,
-				icon: null,       
+				icon: null,
 				baseCost: 150,
 				prod: 1000,
 			},
 			{
 				bId: 9,
-				icon: null,       
+				icon: null,
 				baseCost: 200,
 				prod: 2000,
 			},
@@ -317,7 +139,7 @@ let smithClicker= {
 			upgradeBackground: "./img/upgrade.png",
 		}
 	},
-	polish: 
+	polish:
 	{
 		changeLanguage: "Zmień język",
 		money:          "Pieniądze (PLN)",
@@ -376,7 +198,7 @@ let smithClicker= {
 			"Ta NIESAMOWITA maszyna sprawia, że na małej przestrzeni czas płynie inaczej. Zyskujesz pieniądze 2 razy szybciej"
 		],
 	},
-	english: 
+	english:
 	{
 		changeLanguage: "Change Language",
 		money:          "Money($)",
@@ -478,7 +300,7 @@ class Shop extends React.Component
 		let texts=usedModule[this.props.lang];
 		return  <ul className="shop"
 					style={{backgroundImage:"url("+usedModule.logic.imgs.shopBackground+")"}}>
-					{usedModule.logic.buildingList.map( (el,index) => 
+					{usedModule.logic.buildingList.map( (el,index) =>
 						this.props.maxMoney*2>=this.props.buildCosts[index] || index===0 ? <Building
 						bId={el.bId}
 						methodClick={this.props.methodClick}
@@ -550,7 +372,7 @@ class MainView extends React.Component
 	render()
 	{
 		return  <div className="mainView">
-					<div 
+					<div
 						style={{backgroundImage:"url("+usedModule.logic.imgs.clickedObject+")"}}
 						onClick={this.handleClick}/>
 				</div>;
@@ -610,7 +432,7 @@ class App extends React.Component
 		let profit=profits.reduce( (prev,curr) => prev+curr,0)*this.state.profitMult;
 
 		this.setState({moneySec:profit,});
-	};	
+	};
 	changeClickPower = n => {
 		this.setState({clickPower:this.state.clickPower+n,});
 	};
@@ -624,19 +446,28 @@ class App extends React.Component
 		this.calcProfits();
 	};
 	changeCostMult = n => {
-		this.setState({costMult:this.state.costMult*n});
-		this.calcCosts(this.state.costMult*n,this.state.buildCostMult,this.state.upgCostMult);
+		let newCostMult=this.state.costMult*n;
+		this.setState({costMult:newCostMult});
+		this.calcCosts(newCostMult,this.state.buildCostMult,this.state.upgCostMult);
 	};
 	changeBuildCostMult = n => {
-		this.setState({buildCostMult:this.state.buildCostMult*n});
-		this.calcCosts(this.state.costMult,this.state.buildCostMult*n,this.state.upgCostMult);
+		let newBuildCostMult=this.state.buildCostMult*n;
+		this.setState({buildCostMult:newBuildCostMult});
+		this.calcCosts(this.state.costMult,newBuildCostMult,this.state.upgCostMult);
 	};
 	changeUpgCostMult = n => {
-		this.setState({upgCostMult:this.state.upgCostMult*n});
-		this.calcCosts(this.state.costMult,this.state.buildCostMult,this.state.upgCostMult*n);
+		let newUpgCostMult=this.state.upgCostMult*n;
+		this.setState({upgCostMult:newUpgCostMult});
+		this.calcCosts(this.state.costMult,this.state.buildCostMult,newUpgCostMult);
 	};
 	changeTickTime = n => {
-		this.setState({tickTime:this.state.tickTime*n,});
+		let newTime=this.state.tickTime*n;
+		clearInterval(this.state.interval);
+		let newInter=setInterval(this.addMoney,newTime);
+		this.setState({
+			tickTime:newTime,
+			interval:newInter,
+		});
 	};
 	buyBuilding = bId =>{
 		let buildCost=  this.state.buildCosts[bId];
@@ -680,7 +511,7 @@ class App extends React.Component
 		if(money>=buildCost)
 		{
 			while(money>=buildCost)
-			{           
+			{
 				newBuild[bId]+=1;
 				money-=buildCost;
 				buildCost=nextBuildCost;
@@ -787,6 +618,9 @@ class App extends React.Component
 	componentDidMount()
 	{
 		let intervalId=setInterval(this.addMoney,this.state.tickTime);
+		this.setState({
+			interval:intervalId,
+		});
 	}
 	render()
 	{
