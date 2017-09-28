@@ -13836,6 +13836,9 @@ var smithClicker = {
 		buy: "Kup",
 		buyMax: "Kup max",
 		tick: "Takt",
+		save: "Zapisz",
+		load: "Wczytaj",
+		reset: "Resetuj postęp",
 
 		bName: ["Młotek", "Kowadło", "Robotnik", "Początkujący kowal", "Kowal czeladnik", "Adept kowalstwa", "Kowal ekspert", "Mistrz kowalski", "Kowal z legend", "Agent Kowal"],
 		bDesc: ["Podstawowe narzędzie kowala", "Wykuwa się na nim wygodniej niż na ziemi", "Po prostu wieśniak z młotkiem", "Ten chłopak kiedyś miał w rękach młot kowalski i nawet nim raz machnął", "Ten facet jest niesamowity! Nie uderza się po palcach. Zazwyczaj.", "Wie co robi", "Nie sądziłeś, że jest możliwe wykuwanie dwóch mieczy naraz, ale ten kowal robi to bez problemu", "Uderza tak szybko że ledwo widzisz jego ręce", "Słyszałeś o nim 500 letnią legendę, skąd on się tu wziął?", "Po prostu siedzi na krześle, a przed pojawiają się miecze"],
@@ -13852,6 +13855,9 @@ var smithClicker = {
 		buy: "Buy",
 		buyMax: "Buy max",
 		tick: "Tick",
+		save: "Save",
+		load: "Load",
+		reset: "Reset progress",
 
 		bName: ["Hammer", "Anvil", "Peon", "Novice Smith", "Apprentice Smith", "Adept Smith", "Expert Smith", "Master Smith", "Legendary Smith", "Agent Smith"],
 		bDesc: ["Basic smithing tool", "It's better to smith on this than on the ground", "Just a villager with hammer", "That guy had smithing hammer in hands once", "That man is amazing! He even doesn't hit his fingers. Usually.", "He knows what he is doing", "You haven't thought it is possible to smith two swords at once, but this smith can do that easily", "He is smithing so fast you can barely see his hands", "You heard 500 year old tales about that man, how he got here?", "He just sits on a chair and swords appear in front of him from thin air"],
@@ -14170,9 +14176,16 @@ var App = function (_React$Component6) {
 	_createClass(App, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
+			var _this9 = this;
+
+			if (localStorage.money !== undefined) this.loadData();
 			var intervalId = setInterval(this.addMoney, this.state.tickTime);
+			var save = setInterval(function () {
+				_this9.saveData;console.log("Zapisano!");
+			}, 60000);
 			this.setState({
-				interval: intervalId
+				interval: intervalId,
+				saveInterval: save
 			});
 		}
 	}, {
@@ -14190,6 +14203,21 @@ var App = function (_React$Component6) {
 						'button',
 						{ onClick: this.changeLanguage },
 						texts.changeLanguage
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.saveData },
+						texts.save
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.loadData },
+						texts.load
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.clearData },
+						texts.reset
 					),
 					_react2.default.createElement(
 						'h1',
@@ -14248,7 +14276,7 @@ var App = function (_React$Component6) {
 }(_react2.default.Component);
 
 var _initialiseProps = function _initialiseProps() {
-	var _this9 = this;
+	var _this10 = this;
 
 	this.calcCosts = function (newCostMult, newBuildCostMult, newUpgCostMult) {
 		var costMult = newCostMult;
@@ -14261,7 +14289,7 @@ var _initialiseProps = function _initialiseProps() {
 			return el.baseCost * costMult * upgCostMult;
 		});
 
-		_this9.setState({
+		_this10.setState({
 			costMult: costMult,
 			buildCosts: buildCosts,
 			upgCosts: upgCosts
@@ -14271,83 +14299,83 @@ var _initialiseProps = function _initialiseProps() {
 
 	this.calcProfits = function () {
 		var profits = usedModule.logic.buildingList.map(function (el, index) {
-			return _this9.state.prod[index] * _this9.state.buildings[index];
+			return _this10.state.prod[index] * _this10.state.buildings[index];
 		});
 		var profit = profits.reduce(function (prev, curr) {
 			return prev + curr;
-		}, 0) * _this9.state.profitMult;
+		}, 0) * _this10.state.profitMult;
 
-		_this9.setState({ moneySec: profit });
+		_this10.setState({ moneySec: profit });
 	};
 
 	this.changeClickPower = function (n) {
-		_this9.setState({ clickPower: _this9.state.clickPower + n });
+		_this10.setState({ clickPower: _this10.state.clickPower + n });
 	};
 
 	this.changeClickPowerMult = function (n) {
-		_this9.setState({ clickPowerMult: _this9.state.clickPowerMult * n });
+		_this10.setState({ clickPowerMult: _this10.state.clickPowerMult * n });
 	};
 
 	this.changeProfitMult = function (n) {
-		var newProfMult = _this9.state.profitMult * n;
+		var newProfMult = _this10.state.profitMult * n;
 
-		_this9.setState({ profitMult: newProfMult });
-		_this9.calcProfits();
+		_this10.setState({ profitMult: newProfMult });
+		_this10.calcProfits();
 	};
 
 	this.changeCostMult = function (n) {
-		var newCostMult = _this9.state.costMult * n;
-		_this9.setState({ costMult: newCostMult });
-		_this9.calcCosts(newCostMult, _this9.state.buildCostMult, _this9.state.upgCostMult);
+		var newCostMult = _this10.state.costMult * n;
+		_this10.setState({ costMult: newCostMult });
+		_this10.calcCosts(newCostMult, _this10.state.buildCostMult, _this10.state.upgCostMult);
 	};
 
 	this.changeBuildCostMult = function (n) {
-		var newBuildCostMult = _this9.state.buildCostMult * n;
-		_this9.setState({ buildCostMult: newBuildCostMult });
-		_this9.calcCosts(_this9.state.costMult, newBuildCostMult, _this9.state.upgCostMult);
+		var newBuildCostMult = _this10.state.buildCostMult * n;
+		_this10.setState({ buildCostMult: newBuildCostMult });
+		_this10.calcCosts(_this10.state.costMult, newBuildCostMult, _this10.state.upgCostMult);
 	};
 
 	this.changeUpgCostMult = function (n) {
-		var newUpgCostMult = _this9.state.upgCostMult * n;
-		_this9.setState({ upgCostMult: newUpgCostMult });
-		_this9.calcCosts(_this9.state.costMult, _this9.state.buildCostMult, newUpgCostMult);
+		var newUpgCostMult = _this10.state.upgCostMult * n;
+		_this10.setState({ upgCostMult: newUpgCostMult });
+		_this10.calcCosts(_this10.state.costMult, _this10.state.buildCostMult, newUpgCostMult);
 	};
 
 	this.changeTickTime = function (n) {
-		var newTime = _this9.state.tickTime * n;
-		clearInterval(_this9.state.interval);
-		var newInter = setInterval(_this9.addMoney, newTime);
-		_this9.setState({
+		var newTime = _this10.state.tickTime * n;
+		clearInterval(_this10.state.interval);
+		var newInter = setInterval(_this10.addMoney, newTime);
+		_this10.setState({
 			tickTime: newTime,
 			interval: newInter
 		});
 	};
 
 	this.buyBuilding = function (bId) {
-		var buildCost = _this9.state.buildCosts[bId];
-		var nextBuildCost = _this9.state.costMult * Math.pow(_this9.state.costIncr + bId * 0.02, _this9.state.buildings[bId] + 1) * usedModule.logic.buildingList[bId].baseCost;
+		var buildCost = _this10.state.buildCosts[bId];
+		var nextBuildCost = _this10.state.costMult * Math.pow(_this10.state.costIncr + bId * 0.02, _this10.state.buildings[bId] + 1) * usedModule.logic.buildingList[bId].baseCost;
 		nextBuildCost = roundToNDecimal(nextBuildCost, 2);
 		buildCost = roundToNDecimal(buildCost, 2);
 
-		if (_this9.state.money >= buildCost) {
-			var newBuild = _this9.state.buildings;
+		if (_this10.state.money >= buildCost) {
+			var newBuild = _this10.state.buildings;
 			newBuild[bId] += 1;
 
-			var newMoney = _this9.state.money - buildCost;
+			var newMoney = _this10.state.money - buildCost;
 			newMoney = roundToNDecimal(newMoney, 2);
 
 			var profits = usedModule.logic.buildingList.map(function (el, index) {
-				return _this9.state.prod[index] * _this9.state.buildings[index];
+				return _this10.state.prod[index] * _this10.state.buildings[index];
 			});
 			var profit = profits.reduce(function (prev, curr) {
 				return prev + curr;
-			}, 0) * _this9.state.profitMult;
+			}, 0) * _this10.state.profitMult;
 			profit = roundToNDecimal(profit, 2);
 
-			var newBuildCost = _this9.state.buildCosts;
+			var newBuildCost = _this10.state.buildCosts;
 			newBuildCost[bId] = nextBuildCost;
 
-			_this9.setState({
+			_this10.setState({
 				buildings: newBuild,
 				money: newMoney,
 				moneySec: profit,
@@ -14357,29 +14385,29 @@ var _initialiseProps = function _initialiseProps() {
 	};
 
 	this.buyMaxBuilding = function (bId) {
-		var buildCost = _this9.state.buildCosts[bId];
-		var nextBuildCost = Math.floor(_this9.state.costMult * Math.pow(_this9.state.costIncr + bId * 0.02, _this9.state.buildings[bId] + 1) * usedModule.logic.buildingList[bId].baseCost);
-		var money = _this9.state.money;
-		var newBuild = _this9.state.buildings;
+		var buildCost = _this10.state.buildCosts[bId];
+		var nextBuildCost = Math.floor(_this10.state.costMult * Math.pow(_this10.state.costIncr + bId * 0.02, _this10.state.buildings[bId] + 1) * usedModule.logic.buildingList[bId].baseCost);
+		var money = _this10.state.money;
+		var newBuild = _this10.state.buildings;
 
 		if (money >= buildCost) {
 			while (money >= buildCost) {
 				newBuild[bId] += 1;
 				money -= buildCost;
 				buildCost = nextBuildCost;
-				nextBuildCost = Math.floor(_this9.state.costMult * Math.pow(_this9.state.costIncr + bId * 0.02, newBuild[bId] + 1) * usedModule.logic.buildingList[bId].baseCost);
+				nextBuildCost = Math.floor(_this10.state.costMult * Math.pow(_this10.state.costIncr + bId * 0.02, newBuild[bId] + 1) * usedModule.logic.buildingList[bId].baseCost);
 			}
-			var newBuildCost = _this9.state.buildCosts;
+			var newBuildCost = _this10.state.buildCosts;
 			newBuildCost[bId] = buildCost;
 
 			var profits = usedModule.logic.buildingList.map(function (el, index) {
-				return _this9.state.prod[index] * _this9.state.buildings[index];
+				return _this10.state.prod[index] * _this10.state.buildings[index];
 			});
 			var profit = profits.reduce(function (prev, curr) {
 				return prev + curr;
-			}, 0) * _this9.state.profitMult;
+			}, 0) * _this10.state.profitMult;
 
-			_this9.setState({
+			_this10.setState({
 				buildings: newBuild,
 				money: money,
 				moneySec: profit,
@@ -14389,83 +14417,137 @@ var _initialiseProps = function _initialiseProps() {
 	};
 
 	this.buyUpgrade = function (uId, effectId) {
-		if (_this9.state.upgrades[uId] === 1) return;
+		if (_this10.state.upgrades[uId] === 1) return;
 
-		var upgCost = _this9.state.upgCosts[uId];
-		if (_this9.state.money >= upgCost) {
-			var newUpgs = _this9.state.upgrades;
+		var upgCost = _this10.state.upgCosts[uId];
+		if (_this10.state.money >= upgCost) {
+			var newUpgs = _this10.state.upgrades;
 			newUpgs[uId] = 1;
 
 			var effectPow = usedModule.logic.upgradeList[uId].effectPow;
 
 			switch (effectId) {
 				case 0:
-					_this9.changeClickPower(effectPow);
+					_this10.changeClickPower(effectPow);
 					break;
 				case 1:
-					_this9.changeProfitMult(effectPow);
+					_this10.changeProfitMult(effectPow);
 					break;
 				case 2:
-					_this9.changeClickPowerMult(effectPow);
+					_this10.changeClickPowerMult(effectPow);
 					break;
 				case 3:
-					_this9.changeCostMult(effectPow);
+					_this10.changeCostMult(effectPow);
 					break;
 				case 4:
-					_this9.changeBuildCostMult(effectPow);
+					_this10.changeBuildCostMult(effectPow);
 					break;
 				case 5:
-					_this9.changeUpgCostMult(effectPow);
+					_this10.changeUpgCostMult(effectPow);
 					break;
 				case 6:
-					_this9.changeTickTime(effectPow);
+					_this10.changeTickTime(effectPow);
 					break;
 			}
 
-			var newMoney = _this9.state.money;
+			var newMoney = _this10.state.money;
 			newMoney -= upgCost;
-			_this9.setState({
+			_this10.setState({
 				money: newMoney
 			});
 		}
 	};
 
 	this.mainClick = function () {
-		var newMoney = _this9.state.money + _this9.state.clickPower * _this9.state.clickPowerMult;
-		var newMaxMoney = _this9.state.maxMoney > newMoney ? _this9.state.maxMoney : newMoney;
+		var newMoney = _this10.state.money + _this10.state.clickPower * _this10.state.clickPowerMult;
+		var newMaxMoney = _this10.state.maxMoney > newMoney ? _this10.state.maxMoney : newMoney;
 
-		_this9.setState({
+		_this10.setState({
 			money: newMoney,
-			click: _this9.state.click + 1,
+			click: _this10.state.click + 1,
 			maxMoney: newMaxMoney
 		});
 	};
 
 	this.addMoney = function () {
-		var newMoney = Math.round((_this9.state.money + _this9.state.moneySec) * 1000) / 1000;
+		var newMoney = Math.round((_this10.state.money + _this10.state.moneySec) * 1000) / 1000;
 		newMoney = Math.round(newMoney * 100) / 100;
-		var newMaxMoney = _this9.state.maxMoney > newMoney ? _this9.state.maxMoney : newMoney;
+		var newMaxMoney = _this10.state.maxMoney > newMoney ? _this10.state.maxMoney : newMoney;
 
-		_this9.setState({
+		_this10.setState({
 			money: newMoney,
-			lastClick: _this9.state.click,
+			lastClick: _this10.state.click,
 			click: 0,
 			maxMoney: newMaxMoney
 		});
 	};
 
 	this.changeLanguage = function () {
-		if (_this9.state.lang === "polish") {
-			_this9.setState({
+		if (_this10.state.lang === "polish") {
+			_this10.setState({
 				lang: "english"
 			});
-		} else if (_this9.state.lang === "english") {
-			_this9.setState({
+		} else if (_this10.state.lang === "english") {
+			_this10.setState({
 				lang: "polish"
 			});
 		}
 
-		texts = module[_this9.state.lang];
+		texts = module[_this10.state.lang];
+	};
+
+	this.saveData = function () {
+		localStorage.money = _this10.state.money;
+		localStorage.moneySec = _this10.state.moneySec;
+		localStorage.maxMoney = _this10.state.maxMoney;
+		localStorage.buildings = _this10.state.buildings;
+		localStorage.buildCosts = _this10.state.buildCosts;
+		localStorage.prod = _this10.state.prod;
+		localStorage.upgrades = _this10.state.upgrades;
+		localStorage.upgCosts = _this10.state.upgCosts;
+		localStorage.clickPower = _this10.state.clickPower;
+		localStorage.clickPowerMult = _this10.state.clickPowerMult;
+		localStorage.profitMult = _this10.state.profitMult;
+		localStorage.costMult = _this10.state.costMult;
+		localStorage.buildCostMult = _this10.state.buildCostMult;
+		localStorage.upgCostMult = _this10.state.upgCostMult;
+		localStorage.tickTime = _this10.state.tickTime;
+		localStorage.lastSave = Date.now();
+	};
+
+	this.loadData = function () {
+		var loc = localStorage;
+		_this10.setState({
+			money: parseFloat(loc.money),
+			moneySec: parseFloat(loc.moneySec),
+			maxMoney: parseFloat(loc.maxMoney),
+			buildings: localStorage.buildings.split(",").map(function (el) {
+				return parseInt(el);
+			}),
+			buildCosts: localStorage.buildCosts.split(",").map(function (el) {
+				return parseInt(el);
+			}),
+			prod: localStorage.prod.split(",").map(function (el) {
+				return parseInt(el);
+			}),
+			upgrades: localStorage.upgrades.split(",").map(function (el) {
+				return parseInt(el);
+			}),
+			upgCosts: localStorage.upgCosts.split(",").map(function (el) {
+				return parseInt(el);
+			}),
+			clickPower: parseFloat(loc.clickPower),
+			clickPowerMult: parseFloat(loc.clickPowerMult),
+			profitMult: parseFloat(loc.profitMult),
+			costMult: parseFloat(loc.costMult),
+			buildCostMult: parseFloat(loc.buildCostMult),
+			upgCostMult: parseFloat(loc.upgCostMult),
+			tickTime: parseFloat(loc.tickTime)
+		});
+	};
+
+	this.clearData = function () {
+		localStorage.clear();
 	};
 };
 

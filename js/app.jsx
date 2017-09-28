@@ -150,6 +150,9 @@ let smithClicker= {
 		buy:            "Kup",
 		buyMax:         "Kup max",
 		tick:           "Takt",
+		save:			"Zapisz",
+		load:			"Wczytaj",
+		reset: 			"Resetuj postęp",
 
 		bName:
 		[
@@ -209,6 +212,9 @@ let smithClicker= {
 		buy:            "Buy",
 		buyMax:         "Buy max",
 		tick:           "Tick",
+		save:			"Save",
+		load:			"Load",
+		reset: 			"Reset progress",
 
 		bName:
 		[
@@ -614,12 +620,57 @@ class App extends React.Component
 		}
 
 		texts=module[this.state.lang];
-	}
+	};
+	saveData = () => {
+		localStorage.money=this.state.money;
+		localStorage.moneySec=this.state.moneySec;
+		localStorage.maxMoney=this.state.maxMoney;
+		localStorage.buildings=this.state.buildings;
+		localStorage.buildCosts=this.state.buildCosts;
+		localStorage.prod=this.state.prod;
+		localStorage.upgrades=this.state.upgrades;
+		localStorage.upgCosts=this.state.upgCosts;
+		localStorage.clickPower=this.state.clickPower;
+		localStorage.clickPowerMult=this.state.clickPowerMult;
+		localStorage.profitMult=this.state.profitMult;
+		localStorage.costMult=this.state.costMult;
+		localStorage.buildCostMult=this.state.buildCostMult;
+		localStorage.upgCostMult=this.state.upgCostMult;
+		localStorage.tickTime=this.state.tickTime;
+		localStorage.lastSave=Date.now();
+	};
+	loadData = () => {
+		let loc=localStorage;
+		this.setState({
+			money:parseFloat(loc.money),
+			moneySec:parseFloat(loc.moneySec),
+			maxMoney:parseFloat(loc.maxMoney),
+			buildings:localStorage.buildings.split(",").map(el => parseInt(el)),
+			buildCosts:localStorage.buildCosts.split(",").map(el => parseInt(el)),
+			prod:localStorage.prod.split(",").map(el => parseInt(el)),
+			upgrades:localStorage.upgrades.split(",").map(el => parseInt(el)),
+			upgCosts:localStorage.upgCosts.split(",").map(el => parseInt(el)),
+			clickPower:parseFloat(loc.clickPower),
+			clickPowerMult:parseFloat(loc.clickPowerMult),
+			profitMult:parseFloat(loc.profitMult),
+			costMult:parseFloat(loc.costMult),
+			buildCostMult:parseFloat(loc.buildCostMult),
+			upgCostMult:parseFloat(loc.upgCostMult),
+			tickTime:parseFloat(loc.tickTime),
+		});
+	};
+	clearData = () => {
+		localStorage.clear();
+	};
 	componentDidMount()
 	{
+		if(localStorage.money!==undefined)
+			this.loadData();
 		let intervalId=setInterval(this.addMoney,this.state.tickTime);
+		let save=setInterval( () => {this.saveData; console.log("Zapisano!");},60000);
 		this.setState({
 			interval:intervalId,
+			saveInterval:save,
 		});
 	}
 	render()
@@ -629,6 +680,9 @@ class App extends React.Component
 						style={{backgroundImage:"url("+usedModule.logic.imgs.background+")"}}>
 					<div className="mainScreen col-8">
 						<button onClick={this.changeLanguage}>{texts.changeLanguage}</button>
+						<button onClick={this.saveData}>{texts.save}</button>
+						<button onClick={this.loadData}>{texts.load}</button>
+						<button onClick={this.clearData}>{texts.reset}</button>
 						<h1 className="money">{texts.money}: {this.state.money.toFixed(2)}</h1>
 						<h2 className="moneySec">{texts.moneyOnSec}: {(this.state.moneySec*(1000/this.state.tickTime)).toFixed(2)}</h2>
 						<h3 className="clicksSec">{texts.clicksOnSec}: {this.state.lastClick}</h3>
